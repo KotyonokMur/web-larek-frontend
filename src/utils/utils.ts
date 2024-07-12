@@ -133,3 +133,8 @@ export function createElement<
     }
     return element;
 }
+
+// Added:
+export function formatNumber(x: number, sep = ' ') {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+}
