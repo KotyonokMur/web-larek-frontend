@@ -129,7 +129,6 @@ events.on('page:changed', () => {
 
 // Открыть форму заказа
 events.on('order:open', () => {
-    //console.log(appData);
     appData.clearOrderStatus();
     modal.render({
         content: orderForm.render({
@@ -143,8 +142,6 @@ events.on('order:open', () => {
 
 // Отправлена форма заказа
 events.on('order:submit', () => {
-    // Логика обработки заказа
-    //console.log('Order submitted with data:', appData);
     modal.render({
         content: contactsForm.render({
             phone: '',
@@ -171,10 +168,8 @@ events.on('contacts:open', () => {
 events.on('contacts:submit', () => {
     api.orderProducts(appData.order)
         .then((result) => {
-            console.log(appData);
             const success = new Success(cloneTemplate(successPageTemplate), {
                 onClick: () => {
-                    console.log(appData)
                     modal.close();
                     appData.clearBasket();
                     appData.clearOrderStatus();
@@ -185,7 +180,6 @@ events.on('contacts:submit', () => {
                     total: result.total
                 })
             });
-            console.log(result);
         })
         .catch(err => {
             console.error(err);
