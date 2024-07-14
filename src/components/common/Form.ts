@@ -28,25 +28,6 @@ export class Form<T> extends Component<IFormState> {
             e.preventDefault();
             this.events.emit(`${(this.container as HTMLFormElement).name}:submit`);
         });
-
-        // Обработка кнопок выбора типа оплаты
-        this.container.querySelectorAll('button[name=card], button[name=cash]').forEach(button => {
-            button.addEventListener('click', () => {
-                const paymentType = button.getAttribute('name');
-
-                this.container.querySelectorAll('button[name=card], button[name=cash]').forEach(btn => {
-                    btn.classList.remove('button_alt-active');
-                    btn.classList.add('button_alt');
-                });
-
-                if (button) {
-                    button.classList.add('button_alt-active');
-                    button.classList.remove('button_alt');
-                }
-
-                this.onInputChange('paymentType' as keyof T, paymentType);
-            });
-        });
     }
 
     protected onInputChange(field: keyof T, value: string) {

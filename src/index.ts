@@ -5,14 +5,14 @@ import {EventEmitter} from "./components/base/events";
 import {cloneTemplate, ensureElement} from "./utils/utils";
 // Custom
 import {Page} from "./components/Page";
-import {Basket} from "./components/common/Basket"
+import {Basket} from "./components/Basket"
 import {AppApi} from "./components/AppApi";
 import {AppState, CatalogChangeEvent, CardItem} from "./components/AppData";
 import {Modal} from "./components/common/Modal";
 import {CatalogItem, ProductItem, BasketItem} from "./components/Card";
 import {Order, Contacts} from "./components/Order"
 import {IOrderForm} from './types';
-import {Success} from './components/common/Success'
+import {Success} from './components/Success'
 
 // Base objects
 const events = new EventEmitter();
@@ -142,6 +142,7 @@ events.on('order:open', () => {
 
 // Отправлена форма заказа
 events.on('order:submit', () => {
+    console.log(appData);
     modal.render({
         content: contactsForm.render({
             phone: '',

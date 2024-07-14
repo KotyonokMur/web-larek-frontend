@@ -70,7 +70,7 @@ export class Card<T> extends Component<IProduct<T>> {
 
 // Для отображения карточки каталога на главной странице
 export class CatalogItem extends Card<HTMLElement> {
-    
+
     constructor(container: HTMLElement, actions?: ICardActions) {
         super('card', container, actions);
     }
@@ -83,13 +83,13 @@ export class CatalogItem extends Card<HTMLElement> {
         this._category.className = `card__category ${this.getCategoryClass(
             value.toLowerCase()
         )}`;
-        this._category.textContent = value;
+        this.setText(this._category, value);
     }
 }
 
 // Для отображение полной информации о продукте и покупке
 export class ProductItem extends Card<HTMLElement> {
-    
+
     constructor(container: HTMLElement, actions?: ICardActions) {
         super('card', container, actions);
         this._description = container.querySelector(`.card__text`);
@@ -122,23 +122,24 @@ export class ProductItem extends Card<HTMLElement> {
         this._category.className = `card__category ${this.getCategoryClass(
             value.toLowerCase()
         )}`;
-        this._category.textContent = value;
+        this.setText(this._category, value);
     }
 
     //Если товар в корзине или нет цены, товар нельзя добавить в корзину.
     protected updateButtonState() {
         if (this._inBasket) {
             this.setDisabled(this._button, true);
-            this._button.textContent = 'В корзине';
+            this.setText(this._button, 'В корзине');
         } else if (!this._priceValue) {
             this.setDisabled(this._button, true);
-            this._button.textContent = 'В корзину';
+            this.setText(this._button, 'В корзину');
         } else {
             this.setDisabled(this._button, false);
-            this._button.textContent = 'В корзину';
+            this.setText(this._button, 'В корзину');
         }
     }
 }
+
 
 //Для отображения в корзине
 export class BasketItem extends Card<HTMLElement>{
